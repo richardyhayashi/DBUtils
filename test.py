@@ -16,6 +16,8 @@ proc = lambda session: print(session)
 db.run_session(proc)
 db.run_session(proc)
 
+print(db.get_tables())
+
 def myproc(sess, str1=None, str2=None):
     print(str1, str2, sess)
 
