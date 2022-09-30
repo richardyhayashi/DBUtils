@@ -1,14 +1,16 @@
-from os.path import join, dirname
-from dotenv import load_dotenv
+from config.settings import Settings
 from dbFactory.db import Database
-from dbFactory.dbenvinfo import DBInfo
 
-dotenv_path = join(dirname(__file__), 'config', '.env')
-load_dotenv( dotenv_path )
+# Get the environment settings.
+settings = Settings()
 
-db = Database(dbinfo=DBInfo())
+print(settings.dict())
 
-print( db )
+# Initialize the database with settings.
+db = Database(settings=settings)
+
+print(db)
+print(repr(db))
 
 proc = lambda session: print(session)
 db.run_session(proc)
@@ -25,4 +27,3 @@ def otherproc(sess):
 #l = lambda str : myproc(str1='One', str2='Two', str3=str) 
 
 someproc(otherproc)
-print(db.get_tables())
